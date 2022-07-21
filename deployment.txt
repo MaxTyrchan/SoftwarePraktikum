@@ -1,0 +1,7 @@
+Things to do before uploading to Google App Engine:
+- Adapt #ServerBaseURL in API.js to real base URL
+- Check db connection credentials in mapper.py
+- Import database with demo data to Google Cloud SQL instance
+- Run "npm run build" for frontend and copy full backend folder content to build folder
+- Delete pipfile from build folder
+- Upload to GAE by running "gcloud app deploy" in the build directory
