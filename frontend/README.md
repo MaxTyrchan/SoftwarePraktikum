@@ -3,12 +3,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
 Download and install node and npm https://nodejs.org/en/download/
 
-### Authors
-
-- Max Tyrchan
-- Nicole Sauer
-- Jasmin Krewenka
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -40,6 +34,3 @@ This command will remove the single build dependency from your project.
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, ...) into your project.
 All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-________
-<i>Written by Max Tyrchan</i>
