@@ -1,0 +1,118 @@
+{
+    "persons": [
+        {
+            "id": 0,
+            "first_name": "John",
+            "last_name": "Michael",
+            "email": "jm@web.de",
+            "role": "Manager",
+            "task_id": 100,
+            "user_id": 10
+        },
+        {
+            "id": 1,
+            "first_name": "Horst",
+            "last_name": "Finger",
+            "email": "hf@web.de",
+            "role": "Employee",
+            "task_id": 101,
+            "user_id": 11
+        },
+        {
+            "id": 2,
+            "first_name": "Hubert",
+            "last_name": "Krimskrams",
+            "email": "hk@web.de",
+            "role": "Employee",
+            "task_id": 102,
+            "user_id": 12
+        }
+    ],
+    "projects": [
+        {
+            "id": 0,
+            "title": "Marketing Project 101",
+            "start_date": "2022-01-01T23:59:00.511Z",
+            "end_date": "2022-02-15T23:59:00.511Z",
+            "status": "1",
+            "member_id": 120423
+        }
+    ],
+    "tasks": [
+        {
+            "id": 11,
+            "title": "Make a design",
+            "project_id": 0
+        },
+        {
+            "id": 22,
+            "title": "Write an essay",
+            "project_id": 0
+        },
+        {
+            "id": 33,
+            "title": "Tickle the toe",
+            "project_id": 0
+        },
+        {
+            "id": 44,
+            "title": "Re-work artworks",
+            "project_id": 0
+        }
+    ],
+    "members":
+    [
+        {
+            "id": 120423,
+            "name": "Daimler AG"
+        }
+    ],
+    "users":
+    [
+        {
+            "id": 10,
+            "username": "username0",
+            "password": "username0",
+            "last_login": "2022-01-01T23:59:00.511Z"
+        },
+        {
+            "id": 11,
+            "username": "username1",
+            "password": "username1",
+            "last_login": "2022-01-01T23:59:00.511Z"
+        },
+        {
+            "id": 12,
+            "username": "username2",
+            "password": "username2",
+            "last_login": "2022-01-01T23:59:00.511Z"
+        }
+    ],
+    "transactions":
+    [
+        {
+            "id": 1000,
+            "started_at": "2021-12-10T13:45:00.000Z",
+            "finished_at": "2021-12-10T18:47:00.000Z",
+            "project_id": "0",
+            "person_id": "0",
+            "task_id": 11
+        },
+        {
+            "id": 1001,
+            "started_at": "2021-12-10T13:45:00.000Z",
+            "finished_at": "2021-12-10T16:55:00.000Z",
+            "project_id": "0",
+            "person_id": "1",
+            "task_id": 22
+        },
+        {
+            "id": 1002,
+            "started_at": "2021-12-10T13:45:00.000Z",
+            "finished_at": "2021-12-10T18:19:00.000Z",
+            "project_id": "0",
+            "person_id": "2",
+            "task_id": 33
+        }
+    ]
+}

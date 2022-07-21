@@ -1,0 +1,21 @@
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// PLEASE READ:
+// Before starting the React server for the first time run "npm install" in the terminal to download the node_modules folder,
+// which is required to successfully start the server
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// If you get an error saying: "npm: Die Bennenung 'npm' wurde nicht als Name eines Cmdlet, ..." make sure you have Node.js installed -> https://nodejs.org/en/download/
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "npm: start",
+            "outputCapture": "std"
+        }
+    ]
+}

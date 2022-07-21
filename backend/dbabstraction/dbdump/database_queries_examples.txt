@@ -1,0 +1,103 @@
+#get a project by project_id
+SELECT * FROM timebooking.projects
+WHERE id = "e860fd25-f776-44f4-9311-ccf15cac9510"
+
+#get projects where u have different customer
+SELECT * FROM timebooking.projects
+where customer = "Daimler" or "VW"
+
+#returs project_id for all projects < curdate,
+#which means all projects where we are over the finishing date;
+SELECT p.id, pt.end_time, pt.start_time FROM timebooking.projects p LEFT JOIN timebooking.project_times pt ON pt.id = p.project_time_id
+WHERE pt.end_time < curdate();
+
+#get a task by task_id
+SELECT * FROM timebooking.tasks
+where id = "e860fd25-f776-44f4-9311-ccf15cac9534"
+
+#get all tasks with the same project_id
+SELECT * FROM timebooking.tasks
+where project_id = "e860fd25-f776-44f4-9311-ccf15cac9510"
+
+#get a specific task_time
+SELECT * FROM timebooking.task_times
+where id = "e860fd25-f776-44f4-9311-ccf15cac9530"
+
+#returns the duration for every task
+select id,
+TIMESTAMPDIFF(MINUTE, start_time, end_time) as duration
+from timebooking.task_times;
+
+#returns the duration for a specific task
+select id,
+TIMESTAMPDIFF(MINUTE, start_time, end_time) as duration
+from timebooking.task_times
+where id = "e860fd25-f776-44f4-9311-ccf15cac9530"
+
+# get all tasks with duration for a project
+SELECT t.task_name, tt.start_time, tt.end_time, TIMESTAMPDIFF(MINUTE, tt.start_time, tt.end_time) as duration FROM timebooking.tasks t
+LEFT JOIN timebooking.interval_transactions it ON t.id = it.interval_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+WHERE t.project_id = "e860fd25-f776-44f4-9311-ccf15cac9510";
+
+
+
+SELECT SUM(task_durations.duration) FROM (
+SELECT t.task_name, tt.start_time, tt.end_time, TIMESTAMPDIFF(MINUTE, tt.start_time, tt.end_time) as duration FROM timebooking.tasks t
+LEFT JOIN timebooking.interval_transactions it ON t.id = it.interval_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+WHERE t.project_id = "e860fd25-f776-44f4-9311-ccf15cac9510") as task_durations;
+
+#returns every task for a specific account
+SELECT t.id, t.task_name FROM timebooking.interval_transactions it
+LEFT JOIN timebooking.tasks t ON t.id = it.task_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538";
+
+#returns every task for a specific account in a timespan ordered by start_time
+SELECT t.id, p.first_name, p.last_name, t.task_name, tt.end_time, tt.start_time from timebooking.interval_transactions it
+LEFT JOIN timebooking.tasks t ON t.id = it.task_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+LEFT JOIN timebooking.accounts a ON a.id = account_id
+LEFT JOIN timebooking.persons p ON p.id = a.person_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538"
+order by tt. start_time;
+
+#returns every project a specific person has worked on
+SELECT distinct pj.id, pj.project_name, p.first_name, p.last_name, tt.end_time, tt.start_time, timestampdiff(MINUTE, tt.start_time, tt.end_time) as duration
+from timebooking.interval_transactions it
+LEFT JOIN timebooking.tasks t ON t.id = it.task_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+LEFT JOIN timebooking.accounts a ON a.id = account_id
+LEFT JOIN timebooking.persons p ON p.id = a.person_id
+LEFT JOIN timebooking.projects pj ON pj.id = t.project_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538"
+order by project_name;
+
+#returns every task a specific person has worked on in a specific project
+SELECT pj.id, pj.project_name, p.first_name, p.last_name, tt.end_time, tt.start_time, timestampdiff(MINUTE, tt.start_time, tt.end_time) as duration
+from timebooking.interval_transactions it
+LEFT JOIN timebooking.tasks t ON t.id = it.task_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+LEFT JOIN timebooking.accounts a ON a.id = account_id
+LEFT JOIN timebooking.persons p ON p.id = a.person_id
+LEFT JOIN timebooking.projects pj ON pj.id = t.project_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538"
+and project_id = "85f00322-16b9-4447-9bbb-344dceb001fg"
+order by project_name;
+
+#sums up all the time a specific persons worked on a specific project
+SELECT SUM(timestampdiff(MINUTE, tt.start_time, tt.end_time)) as duration
+from timebooking.interval_transactions it
+LEFT JOIN timebooking.tasks t ON t.id = it.task_id
+LEFT JOIN timebooking.task_times tt ON tt.id = it.interval_id
+LEFT JOIN timebooking.accounts a ON a.id = account_id
+LEFT JOIN timebooking.persons p ON p.id = a.person_id
+LEFT JOIN timebooking.projects pj ON pj.id = t.project_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538"
+and project_id = "85f00322-16b9-4447-9bbb-344dceb001fg"
+
+#returns all work_times of a specific person
+SELECT wt.id, wt.last_change, wt.start_time, wt.end_time FROM timebooking.interval_transactions it
+LEFT JOIN timebooking.work_times wt on wt.id = it.interval_id
+WHERE account_id = "e860fd25-f776-44f4-9311-ccf15cac9538"
+order by id;
